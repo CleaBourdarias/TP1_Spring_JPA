@@ -1,4 +1,6 @@
 package monprojet.dao;
+import java.util.*;
+import javax.persistence.Tuple;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -39,6 +41,21 @@ public class CountryRepositoryTest {
         int combienDePaysDansLeJeuDeTest = 3 + 1; // 3 dans data.sql, 1 dans test-data.sql
         long nombre = countryDAO.count();
         assertEquals(combienDePaysDansLeJeuDeTest, nombre, "On doit trouver 4 pays" );
+    }
+
+    @Test
+    void populationPaysTest(){
+        int pop = 12+72;
+        int popFonction = countryDAO.populationPays(1);
+        assertEquals(pop, popFonction);
+    }
+
+    @Test
+    void nomPaysPopulationTest(){
+        List<Tuple> maListe = countryDAO.nomPaysPopulation();
+        assertEquals(12+72, maListe.get(0).get(1));
+        assertEquals(18, maListe.get(1).get(1));
+        assertEquals(27, maListe.get(2).get(1));
     }
 
 }

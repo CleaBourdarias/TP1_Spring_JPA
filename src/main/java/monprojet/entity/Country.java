@@ -5,6 +5,8 @@ import org.hibernate.annotations.Proxy;
 
 import lombok.*;
 
+import java.util.*;
+
 // Un exemple d'entité
 // On utilise Lombok pour auto-générer getter / setter / toString...
 // cf. https://examples.javacodegeeks.com/spring-boot-with-lombok/
@@ -22,4 +24,11 @@ public class Country {
     @Column(unique=true)
     @NonNull
     private String name;
+
+     // Dans la classe "Country.java"
+    @OneToMany(mappedBy="country")
+    // Essayer sans "mappedBy" pour voir le schémma relationnel généré
+    // @OneToMany
+    @ToString.Exclude
+    private List<City> cities = new ArrayList<>();
 }
